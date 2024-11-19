@@ -1,5 +1,6 @@
 require("dotenv").config()
 const axiosInstance = require('./lib/axios')
+
 // get health check
 axiosInstance.get('/health', () => {
     console.log('health check passed')
@@ -19,18 +20,18 @@ const getConcertsByArtistAndCity = async (artist, city) => {
                 city: city
             }
         })
-        console.log(`API response status: ${response.status}`);
-        console.log(`Response data:`, response.data);
-
-        return response;
+        console.log("API Response Status:", response.status);
+        console.log("API Response Data:", response);
+        
+        return response.data;
     } catch (error) {
         console.error(error)
         console.log('Failed to get concerts search data ', error.message)
     }
 }
-getConcertsByArtistAndCity("Taylor", "Las Vegas")
-    .then((result) => {
-        console.log("concerts data", result)
+getConcertsByArtistAndCity("Taylor","Las Vegas")
+    .then((response) => {
+        console.log("concerts data", response)
     }).catch((err) => {
         console.log("error to get reponse artist and city ", err)
     });
